@@ -1,0 +1,352 @@
+/* ==========================================================================
+   布局
+============================================================================ */
+.g-hd{
+	height: 90px;
+}
+.g-box{
+	width: 1205px;
+	margin: 0 auto;
+}
+@media screen and (max-width: 1205px){
+	.g-box{
+		width: 964px;
+	}
+}
+/* ==========================================================================
+   元件
+============================================================================ */
+.u-icon{
+	display:inline-block;	
+}
+.u-icon-close{
+	background: url(../images/icons/close.png) no-repeat ;
+	width: 9px;
+	height:9px;
+}
+.u-icon-plus{
+	background: url(../images/icons/plus.png) no-repeat ;
+	width: 8px;
+	height:8px;
+}
+.u-icon-check{
+	background: url(../images/icons/check.png) no-repeat ;
+	width: 11px;
+	height:9px;
+}
+.u-icon-magnifiy{
+	background: url(../images/icons/magnifiy.png) no-repeat ;
+	width: 19px;
+	height:19px;
+}
+/* ==========================================================================
+   module:tips
+============================================================================ */
+.m-tips{
+	height: 36px;
+	line-height: 36px;
+	background:#f3f3f3;
+}
+.m-tips .viewnow{
+	color: #39a030;
+}
+/* ==========================================================================
+   module:top
+============================================================================ */
+.m-top{
+	padding:33px 0px 37px 0px;
+	height: 22px;
+}
+.m-top .attention{
+	margin-left: 30px;
+	line-height: 22px;
+}
+.m-top .attention.z-show .hbfo{
+	display: none;
+}
+.m-top .attention.z-hide .dnc{
+	display: none;
+}
+.m-top .dnc a{
+	display: block;
+	width: 55px;
+	background:#21a557;
+	border-radius: 2px;
+	text-align:center;
+	color: #fff;
+}
+.m-top .hbfo {
+	padding:0px 6px;
+	height: 20px;
+	border: 1px solid #efefef;
+	border-radius: 2px;
+	line-height: 20px;
+	background: #f8f8f8;
+}
+.m-top .hbfo:hover{
+	background-color: #fff;
+}
+.m-top .cancel{
+	color: #999999;
+}
+.m-top .info{
+	color:#333333;
+}
+.m-top .interval{
+	color:#cccccc;
+} 
+.m-top .cancel:hover{
+	color:#21a557;
+	text-decoration:underline;
+}
+.m-top .num{
+	margin-left: 15px;
+	color: #666;
+}
+.m-top .nav{
+	font-size: 16px;
+}
+
+.m-top .nav .search,.m-top .nav .netease{
+	margin-left: 0px;
+}
+.m-top .netease a:hover{
+	color:#39a030;
+}
+.m-top .nav .search{
+	margin:0px 14px 0px 30px;
+}
+.m-top .nav li{
+	display: inline-block;
+	float: left;
+	margin-left: 55px;
+}
+.m-top .search .u-icon-magnifiy:hover{
+	background: url(../images/icons/magnifiy-hover.png) no-repeat ;
+}
+/* ==========================================================================
+   module:sld
+============================================================================ */
+.m-sld {
+	height: 376px;
+}
+.m-sld .imgs{
+	position: relative;
+	height: 100%;
+	overflow: hidden;
+}
+.m-sld img{
+	width: 100%;
+}
+.m-sld .dot{
+	z-index: 2000;
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	text-align: center;
+}
+.m-sld .dot span{
+	display: inline-block;
+	margin-right: 10px;
+	height: 10px;
+	width: 10px;
+	border-radius: 50%;
+	background: #000;
+}
+.m-sld .dot span.z-show{
+	background:#fff;
+}
+/* ==========================================================================
+   module:snav
+============================================================================ */
+.m-snav ul{
+	height: 176px;
+	margin-left: -80px;
+}
+.m-snav li {
+	float: left;
+	width: 33.33%;
+	padding-left: 80px;
+    box-sizing: border-box;
+}
+.m-snav .logo{
+	float: left;
+	height: 80px;
+	width: 80px;
+	border-radius:50px;
+	background:#39a030  no-repeat center;
+}
+.m-snav .logo-1{
+	background-image:url("../images/icons/opnCrs.png") ;
+}
+.m-snav .logo-2{
+	background-image:url("../images/icons/cldClass.png") ;
+}
+.m-snav .logo-3{
+	background-image:url("../images/icons/mooc.png") ;
+}
+.m-snav .explain{
+	margin-left: 100px;
+	font-size:14px;
+}
+.m-snav .tt{
+	font-size: 22px;
+	font-weight: 300;
+}
+.m-snav .info{
+	margin:20px 0px;
+	line-height: 24px;
+	color: #666;
+}
+.m-snav .more{
+	color: #39a030;
+}
+.m-snav .more:hover{
+	color:#39a030;
+	text-decoration:underline;
+}
+
+
+.m-ftbd{
+	background:  #F8F8F8;
+}
+/* ==========================================================================
+   module:snav
+============================================================================ */
+.m-imgs{
+	height: 220px;
+	background: url("../images/xAxisPic.jpg") no-repeat scroll center top;
+}
+/* ==========================================================================
+   module:coursebd
+============================================================================ */
+.m-coursebd{
+	padding: 80px 0px 120px;
+}
+.m-coursebd .nav{
+	margin-bottom: 20px;
+	height: 50px;
+}
+.m-coursebd .nav li{
+	float: left;
+}
+.m-coursebd .nav li a{
+	display: block;
+	font-size:20px;
+	padding: 13px 60px;
+	box-shadow: 0px 1px 0px 0px #d4d3d3;
+	border: 1px solid #D4D3D3;
+}
+.m-coursebd .nav li a:hover , .m-coursebd .nav li a.z-crl{
+	background-color: #3E9E37;
+	color: #FFF;
+}
+.m-coursebd .main{
+	float: left;
+	width: 980px; 
+}
+@media screen and (max-width: 1205px){
+	.m-coursebd .main{
+		width: 735px; 
+	}
+}
+.m-coursebd .page-1{
+	margin-right: 20px;
+}
+.m-coursebd .courselist li{
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	width: 223px;
+	border: 1px solid #ebebeb;
+	box-shadow: 0px 1px 1px 0px #f1f1f1;
+	background: #fff;
+}
+.m-coursebd .courselist .infoarea{
+	margin:10px 5px;
+}
+.m-coursebd .courselist .logo{
+	margin: 1px;
+}
+.m-coursebd .courselist .tt{
+	color: #333;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.m-coursebd .courselist .writer{
+	margin-top:10px;
+	color: #999;
+}
+.m-coursebd .courselist .pnum{
+	display: inline-block;
+    margin-top: 10px;
+    padding: 4px 5px 4px 18px;
+    max-width: 50px;
+    height: 8px;
+    font: 8px;
+    color: #999;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    background: url(../images/icons/people.png) no-repeat;
+    background-position: 3px 2px;
+}
+.m-coursebd .courselist .price{
+	margin-top:10px;
+	color: #ff3f00;
+}
+
+.m-coursebd .side{
+	width: 225px;
+	float: right;
+}
+
+.m-jsbox {
+	border: 1px solid #D4D3D3;
+	background: #FFF;
+}
+.m-jsbox .tt{
+	padding: 20px 0px 20px 20px;
+	font: 16px/16px "Microsoft YaHei";
+	color: #333;
+	border-bottom: 1px solid #D4D3D3;
+}
+.m-jsbox .bd{
+	padding: 20px 0px 20px 20px;
+}
+/* ==========================================================================
+   module:page
+============================================================================ */
+.m-page{
+	height: 20px;
+}
+.m-page li{
+	float: left;
+} 
+.m-page li a{
+	display: block;
+	width: 14px;
+	height: 16px;
+	margin-left: 10px;
+	padding-top: 4px;
+	padding-left: 6px;
+	font: 12px/12px "Microsoft YaHei";
+}
+.m-page li a.pre, .m-page li a.next{
+	width: 20px;
+	height: 16px;
+	padding-left: 10px;
+	padding-top: 4px;
+}
+.m-page li a.z-sel{
+	color: #fff;
+	background-color: #9FD7B2;
+}
+.m-page li a.z-crl{
+	color: #39a030;
+}
+.m-page li a:hover{
+	color: #fff;
+	background-color: #9FD7B2;
+	cursor: pointer;
+}
