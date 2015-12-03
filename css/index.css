@@ -13,6 +13,10 @@
 		width: 964px;
 	}
 }
+.g-ft{
+
+	background: #2c3339;
+}
 /* ==========================================================================
    元件
 ============================================================================ */
@@ -253,35 +257,99 @@
 .m-coursebd .page-1{
 	margin-right: 20px;
 }
+.m-coursebd .courselist{
+	position: relative;
+}
+.m-coursebd  .suspend_course{
+	position: absolute;
+	top: -10px;
+	left: 0px;
+	width: 489px;
+	background: #fff;
+	border: 1px solid #d0cfd0;
+
+}
+
+.m-coursebd  .suspend_course_main{
+	height: 125px;
+	padding: 10px;
+	color: #666;
+}
+.m-coursebd  .suspend_course_main .logo{
+	float: left;
+} 
+.m-coursebd  .suspend_course_main .tt{
+	margin-top: 5px;
+	font-size: 18px;
+	color: #333;
+}
+.m-coursebd  .suspend_course_main .pnum{
+	margin:16px 0px;
+	padding-left: 16px;
+	background: url(../images/icons/people.png) no-repeat;
+
+}
+.m-coursebd  .suspend_course_main .autor{
+	margin-bottom: 10px;
+}
+.m-coursebd  .suspend_course_main .tt{
+	margin-top: 5px;
+	font-size: 18px;
+	color: #333;
+}
+.m-coursebd  .suspend_course_main .tt{
+	margin-top: 5px;
+	font-size: 18px;
+	color: #333;
+}
+.m-coursebd  .suspend_course_main .info{
+	float: left;
+	margin-left:20px;
+}
+.m-coursebd  .suspend_course_introduce{
+	margin-top: 10px;
+	padding: 22px 33px 23px 20px;
+	color: #666;
+	line-height: 25px;
+	font-size: 14px;
+	overflow: hidden;
+	background: #f8f8f8;
+}
 .m-coursebd .courselist li{
 	float: left;
+}
+.m-coursebd .courselist li a{
+	display: block;
+	padding: 1px;
 	margin-right: 20px;
 	margin-bottom: 20px;
-	width: 223px;
+	height: 230px;
+	width: 220.8px;
 	border: 1px solid #ebebeb;
 	box-shadow: 0px 1px 1px 0px #f1f1f1;
 	background: #fff;
 }
-.m-coursebd .courselist .infoarea{
+.m-coursebd .courselist li .infoarea{
 	margin:10px 5px;
 }
-.m-coursebd .courselist .logo{
-	margin: 1px;
+.m-coursebd .courselist li .logo{
+	width: 221px;
+	height: 123px;
 }
-.m-coursebd .courselist .tt{
+.m-coursebd .courselist li .tt{
 	color: #333;
 	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.m-coursebd .courselist .writer{
+.m-coursebd .courselist li .writer{
 	margin-top:10px;
 	color: #999;
 }
-.m-coursebd .courselist .pnum{
+.m-coursebd .courselist li .pnum{
 	display: inline-block;
     margin-top: 10px;
-    padding: 4px 5px 4px 18px;
+    padding: 3px 5px 4px 18px;
     max-width: 50px;
     height: 8px;
     font: 8px;
@@ -289,9 +357,9 @@
     border: 1px solid #ddd;
     border-radius: 2px;
     background: url(../images/icons/people.png) no-repeat;
-    background-position: 3px 2px;
+    background-position: 4px 3px;
 }
-.m-coursebd .courselist .price{
+.m-coursebd .courselist li .price{
 	margin-top:10px;
 	color: #ff3f00;
 }
@@ -312,7 +380,40 @@
 	border-bottom: 1px solid #D4D3D3;
 }
 .m-jsbox .bd{
-	padding: 20px 0px 20px 20px;
+	padding: 20px 14px  20px 20px;
+}
+.m-jgjs .info{
+	margin-bottom:10px;
+	font-size: 14px;
+	color: #666;
+}
+.m-rmph{
+	height: 680px;
+	overflow: hidden;
+}
+.m-rmph li{
+
+	margin-bottom: 20px;
+	height: 50px;
+}
+.m-rmph li img{
+	float: left;
+	width: 50px;
+	height: 50px;
+	margin-right: 12px;
+}
+.m-rmph li h2{
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: #333;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;	
+}
+.m-rmph li span{
+	padding-left:17px;
+	color: #999;
+	background: url(../images/icons/people.png) no-repeat;
 }
 /* ==========================================================================
    module:page
@@ -349,4 +450,141 @@
 	color: #fff;
 	background-color: #9FD7B2;
 	cursor: pointer;
+}
+/* ==========================================================================
+   module:ft
+============================================================================ */
+.m-ft{
+	height: 100px;
+    padding: 80px 0px;
+	color: #a2a4a5;
+	font-size: 12.5px;
+
+}
+.m-ft .wrap{
+	height: 100%;
+	width: 964px;
+	margin-left: 50px;
+}
+.m-ft .logoinfo{
+	float: left;
+	width: 542px;
+	margin-top: 10px;
+}
+.m-ft .beian{
+	margin-top: 30px;
+}
+.m-ft .beian2{
+	margin-top: 15px;
+}
+.m-ft .info{
+	float: left;
+}
+.m-ft .info-1{
+	width: 210px;
+}
+.m-ft .info-2{
+	width: 132px;
+}
+.m-ft .info-3{
+	width: 68px;
+}
+.m-ft .info li{
+	margin-top:15px;
+}
+.m-ft .info  a{
+	font-size: 14.58px;
+	color: #a2a4a5;
+}
+.m-ft .info li a:hover{
+text-decoration:underline;
+}
+
+
+.m-ft .weibo{
+	background: url(../images/icons/weibo.png) no-repeat;
+    background-position: 40px;
+}
+@media screen and (max-width: 1205px){
+	.m-ft .wrap{
+		margin-left: 0px;
+	}
+}
+/* ==========================================================================
+   module:modal
+============================================================================ */
+.m-modal{
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 9999;
+}
+.m-modal .close{
+	font-size: 14px;
+	font-weight: 600;
+	text-align: right;
+}
+.m-modal .bd{
+	padding:10px 8px;
+	position: absolute;	
+	transform: translate(-50%, -50%);
+	top: 45%;
+	left: 50%;
+	background-color: #fff;
+}
+.m-modal .close .closebtn{
+	cursor: pointer;
+}
+.m-modal .close .closebtn:hover{
+	background-color: #ddd;
+}
+/* ==========================================================================
+   module:login
+============================================================================ */
+.m-login{
+	margin:2px 42px 28px 32px;
+}
+.m-login .tt{
+	margin-bottom: 22px;
+	font-size:18px;
+	color: #444;
+}
+.m-login from input{
+	display: block;
+	padding: 15px 0 15px 10px;
+	margin-bottom: 15px;
+	width: 284px;
+	font-size: 16px;
+	background-color: #fafafa;
+	border: 1px solid #f1f1f1;
+	box-shadow: inset 1px 1px 2px #ccc;
+}
+.m-login from input.error{
+	border: 1px solid #FF3939;
+}
+.m-login .submit{
+	margin-top: 30px; 	
+	display: block;
+	width: 295px;
+	height: 48px;
+	line-height: 48px;
+	background: radial-gradient(closest-side, #25ad48, #14952e);
+	color: #fff;
+	text-align: center;
+	font-size: 16px;
+	box-shadow: 2px 3px 0px #d5e3da;
+}
+/* ==========================================================================
+   module:video
+============================================================================ */
+.m-video{
+	margin:2px 22px 28px 26px;
+}
+.m-video .tt{
+	margin-bottom: 20px;
+	font-size: 18px;
+	color: #444;
 }
