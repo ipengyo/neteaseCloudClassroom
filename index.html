@@ -9,9 +9,9 @@
 </head>
 <body>
 	<!-- login -->
-	<div class="m-modal f-dn">
+	<div class="m-modal f-dn" id="loginModal">
 		<div class="bd ">
-			<div class="close" ><span class="f-csp">X</span></div>
+			<div class="close" id="closeLoginModal" ><span class="f-csp">X</span></div>
 			<div class="m-login">
 				<h2 class="tt">登陆网易云课堂</h2>
 				<from >
@@ -46,14 +46,14 @@
 	<!-- /video -->
 
 	<!-- tips -->
-	<div class="m-tips">
+	<div class="m-tips" id="tips">
 		<div class="g-box">
 		    <div class="f-fl">
 		    	网易云课堂微专业，帮助你掌握专业技能，令你求职或加薪多一份独特优势！ 
 		    	<a href="#" class="viewnow">立即查看&gt;</a>
 		    </div>
 		    <div class="f-fr f-csp">
-		    	<a href="#" > 
+		    	<a href="#" id="closeTips"> 
 			    	<span class="u-icon u-icon-close"></span>
 			    	&nbsp;不再提醒 
 		    	</a>
@@ -67,15 +67,14 @@
 		<div class="g-box m-top">
 			<div class="f-fl">
 				<img class="f-fl" src="images/icons/netnease-edu-logo-black.png">
-				<div class="attention z-hide f-fl">
+				<div class="attention z-show f-fl" id = "attention">
 					<div class="dnc f-fl  ">
-						<a href="javascript:void(0)" >
+						<a href="#" id="guanzhudnc">
 							<span class="u-icon u-icon-plus"></span>&nbsp;关注
 						</a>
 					</div>
 					<div class="hbfo f-fl ">
-							<span class="u-icon u-icon-check"></span>关注
-							<span class="info">已关注</span>
+							<span class="u-icon u-icon-check"></span>已关注
 							<span class="interval">|</span>
 							<a class="cancel" href="#">取消</a>
 					</div>
@@ -367,6 +366,8 @@
 		</div>
 		<!-- /ft -->		
 	</div>
-
+<script type="text/javascript" src="./javascript/util.js"></script>
+<script type="text/javascript" src="./javascript/md5.js"></script>
+<script type="text/javascript" src="./javascript/index.js"></script>
 </body>
 </html>
