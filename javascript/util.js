@@ -1,6 +1,6 @@
 /**
  * 一些常用的方法 
- * @author ipengyo@qq.com 
+ * @author ipengyo@qq.com
  * @param  {[type]} global [description]
  * @return {[type]}        [description]
  */
@@ -21,7 +21,7 @@
      */
     var forEach = util.forEach = function(array, fn) {
         for (var i = 0, len = array.length; i < len; i++) {
-            fn(array[i]);
+            fn(array[i], i);
         }
     }
 
@@ -30,7 +30,7 @@
 	 * @param  {[type]} obj [description]
 	 * @return {[type]}     [description]
 	 */
-	util.extend = function(obj){
+	var extend = util.extend = function(obj){
 		if(obj === void 0){
 			return this;
 		}
@@ -43,7 +43,7 @@
 			return this;
 		}
 
-		forEach([].spli(arguments,1), function(item){
+		forEach([].slice.call(arguments,1), function(item){
 			for(var p in item){
 				if(item.hasOwnProperty(p)){
 					obj[p] = item[p];
@@ -80,7 +80,7 @@
 		var cookieObj = {};
 		var all = d.cookie;
 		if(!all) return cookieObj;
-		var listCookie = all.split(";");
+		var listCookie = all.split("; ");
 		forEach(listCookie, function(item){
 	      var p = item.indexOf('=');
 	      var name = item.substring(0, p);
@@ -96,7 +96,7 @@
 	 * @param {[type]} opt [description]
 	 */
 	var setCookie = util.setCookie = function(opt){
-	 var cookie = encodeURIComponent(opt.name) + '=' + encodeURIComponent(opt.value);
+	 var cookie = encodeURIComponent(opt.name)+'='+ encodeURIComponent(opt.value);
 	  if (opt.expires)
 	    cookie += '; expires=' + opt.expires.toGMTString();
 	  if (opt.path)
@@ -169,6 +169,12 @@
 			el.className = oldClassName;
 		}
 	};
+	 //第二个参数:是否冒泡,第三个参数:是否可以preventDefault阻止事件
+	var createEvent = function(type, isbubbling, ispreventDefault){
+		var event = document.createEvent('Events');
+         event.initEvent(type, isbubbling || true, ispreventDefault || true);
+         return event;
+	}
 	/**
 	 * 给el新增事件
 	 * @param {[type]} el      [description]
@@ -200,6 +206,22 @@
 			element['on'+type]=null;
 		}
 	};
+	/**
+	 * 给el触发事件
+	 * @param  {[type]} el   [description]
+	 * @param  {[type]} type [description]
+	 * @return {[type]}      [description]
+	 */
+	var triggerEventListener = util.triggerEventListener = function(el, type){
+		if(el && type){
+			//IE
+			if(el.fireEvent){
+				el.fireEvent(createEvent(type));
+			}else if(el.dispatchEvent){
+				el.dispatchEvent(createEvent(type));
+			}
+		}
+	}
 
 	/**
 	 * 传入事件对象 组织该事件的默认事件
@@ -222,13 +244,20 @@
 	var getElementsByClassName = util.getElementsByClassName =(function(){
 	  if(d.getElementsByClassName){
 	    return function(oEl, sClass){
-	    	oEl = oEl || d;
-	    	return oEle.getElementsByClassName(sClass);
+	    	if(arguments.length == 0){
+	    		retirm ;
+	    	}
+	    	if(arguments.length == 1){
+	    		sClass = oEl;
+	    		oEl =  d;
+	    	}
+	    	return oEl.getElementsByClassName(sClass);
 	    }
 	  }else{
 	  	 return function(oEl, sClass, sEle){
-		   	var aEle=oEle.getElementsByTagName(sEle || '*'),
-		        arr = [],
+	  	 	oEl = oEl || d;
+		   	var aEle=oEl.getElementsByTagName(sEle || '*'),
+		        arr = [];
 		     forEach (aEle, function(){
 		     	classReg(sClass).test(sClass) && arr.push(item);
 		     });
@@ -236,9 +265,41 @@
 		  }
 	  } 
 	})();
+	/**
+	 * 给元素设置透明度
+	 * @param  {[type]} el    [description]
+	 * @param  {[type]} value [description]
+	 * @return {[type]}       [description]
+	 */
+	var setOpacity = util.setOpacity = function(el, value){
+		if(ie678){
+	      // element.style.filter = "Alpha(opacity=" + value*100 + ")";
+	      el.style.filter = "progid:DXImageTransform.Microsoft.Alpha(opacity=" + value*100 + ")";
+	    }else{
+	      el.style.opacity = value;
+	    }
+	}
+	/**
+	 * 获取元素透明度
+	 * @param  {[type]} element [description]
+	 * @return {[type]}         [description]
+	 */
+	var getOpacity = util.getOpacity = function(el){
+	    if(ie678){
+	      var filterAttr = el.style.filter;
+	      if(filterAttr === ""){
+	        return 0;
+	      }
+	      var opacity = filterAttr.substring(filterAttr.indexOf("=") + 1, filterAttr.lastIndexOf(")"));
+	      return parseFloat(opacity) / 100;
+	    }else{
+	      return el.style.opacity;
+	    }
+	}
+
 
 	/**
-	 * domReady 实现 参考自  baidu 
+	 * domReady 实现 参考自  baidu  + 自己理解
 	 * @author ipengyo@qq.com
 	 */
 	var ready = util.ready = (function(){
@@ -299,6 +360,67 @@
 			//没有加载完就直接执行，没有加载完就加到队列里面去
 			ready.isReady ? callback() : readyList.push(callback);
 		}	
+	})();
+	/**
+	 * ajax操作
+	 * @param  {Object} ){		var defaults      [description]
+	 * @return {[type]}          [description]
+	 */
+	var ajax = util.ajax = (function(){
+		var defaults = {
+                method: 'GET',
+                async : true
+        };
+        var xmlHttpReq ;
+        var getXMLHttpReq = function(){
+        	var _xmlHttpReq;
+        	if(window.XMLHttpRequest){
+        		_xmlHttpReq = window.XMLHttpRequest;
+        	}else if(window.ActiveXObject){
+        		//为了兼容IE7以下 浏览器
+        		var versions = [ "MSXML2.XMLHttp.5.0",  "MSXML2.XMLHttp.4.0","MSXML2.XMLHttp.3.0", "MSXML2.XMLHttp","Microsoft.XMLHttp"]; 
+        		forEach(versions, function(item){
+        			try{
+        				_xmlHttpReq = new window.ActiveXObject(item);
+        			}
+        			catch(e){
+        				console.error("IE下ajax对象创建失败");
+        			}
+        		});
+        	}
+        	return _xmlHttpReq;
+        }
+
+        return function(opts){
+        	 opts.method && (opts.method = opts.method.toUpperCase());
+        	//浅拷贝
+        	opts = extend({}, defaults, opts);
+        	xmlHttpReq || (xmlHttpReq = getXMLHttpReq())
+        	var xhr = new xmlHttpReq();
+        	//打开链接
+        	xhr.open(opts.method, opts.url, opts.async);
+        	//设置header
+            if (opts.header) {
+               for (var p in opts.header) {
+              	 xhr.setRequestHeader(p, opts.header[p]);
+               }
+            }
+        	//监控readyState 改变事件
+        	xhr.onreadystatechange = function(){
+        		if (xhr.readyState==4 ){
+        			var _responseText = xhr.responseText;
+        			if(xhr.status == 200){
+        				var _successFn = opts.success;
+        				typeof(_successFn) == 'function' && _successFn(_responseText);
+        			}else{
+        				var _errorFn = opts.error;
+    					typeof(_errorFn) == 'function' && _errorFn(_responseText);
+        			}
+        		}
+        	}
+        	//发送数据
+        	xhr.send(serializeObj_str(opts.data));
+        };
 	})();
 
 })(this);

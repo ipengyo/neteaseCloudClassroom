@@ -134,14 +134,31 @@
 .m-sld {
 	height: 376px;
 }
+.m-sld .imgs a{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+.m-sld .imgs .top{
+	z-index: 1000;
+}
+.m-sld .imgs img{
+
+	height: 100%;
+	width: 100%;
+}
+.m-sld .img{
+	height: 100%;
+	width: 100%;
+}
 .m-sld .imgs{
 	position: relative;
 	height: 100%;
 	overflow: hidden;
 }
-.m-sld img{
-	width: 100%;
-}
+
 .m-sld .dot{
 	z-index: 2000;
 	position: absolute;
