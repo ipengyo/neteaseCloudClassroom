@@ -12,6 +12,30 @@
 	var ie678 = util.ie678 = /\w/.test('\u0130');
 	var d = document ;
 
+	//对String 的原型进行扩展,参考自深入浅出Nodejs @author ipengyo@qq.com
+	String.prototype.format = (function(){
+		var regCache = [];
+		var numberReg = /\#{(\d+)\}/g;
+		return function(args) {
+			var funArguments = arguments;
+		    var result = this;
+		    if (arguments.length > 0) {
+		        if (arguments.length == 1 && typeof(args) == "object") {
+		            for (var key in args) {
+		                var reg = regCache[key] || (regCache = new RegExp("(#{" + key + "})", "g"));
+		                result = result.replace(reg, args[key]);
+		            }
+		        } else {
+            	    result = result.replace(numberReg,function(m,x){  
+            	           return funArguments[x];  
+            	     });  
+		        }
+		        return result;
+		    } else {
+		        return this;
+		    }
+		} 
+	})(); 
 
     /**
      * 数组遍历函数
@@ -214,11 +238,11 @@
 	 */
 	var triggerEventListener = util.triggerEventListener = function(el, type){
 		if(el && type){
-			//IE
-			if(el.fireEvent){
-				el.fireEvent(createEvent(type));
-			}else if(el.dispatchEvent){
+			if(el.dispatchEvent){
 				el.dispatchEvent(createEvent(type));
+			//IE
+			}else if(el.fireEvent){
+				el.fireEvent(createEvent(type));
 			}
 		}
 	}
@@ -245,7 +269,7 @@
 	  if(d.getElementsByClassName){
 	    return function(oEl, sClass){
 	    	if(arguments.length == 0){
-	    		retirm ;
+	    		return ;
 	    	}
 	    	if(arguments.length == 1){
 	    		sClass = oEl;
@@ -296,7 +320,18 @@
 	      return el.style.opacity;
 	    }
 	}
-
+	var datasetReg = /^data-/;
+	var getElementDataSet = util.getElementDataSet = function(el){
+		if(el.dataset) return el.dataset;
+		var oDataset = {};
+		forEach(el.attributes, function(item){
+			var name = element.attributes[i].nodeName;
+   			if(datasetReg.test(name)){
+				oDataset[name] = element.attributes[i].value;
+		   }
+		})
+		return oDataset;
+	};
 
 	/**
 	 * domReady 实现 参考自  baidu  + 自己理解
@@ -392,11 +427,16 @@
         }
 
         return function(opts){
-        	 opts.method && (opts.method = opts.method.toUpperCase());
+        	opts.method && (opts.method = opts.method.toUpperCase());
         	//浅拷贝
         	opts = extend({}, defaults, opts);
         	xmlHttpReq || (xmlHttpReq = getXMLHttpReq())
         	var xhr = new xmlHttpReq();
+
+     		if(opts.method === "GET" && opts.data != null && opts.data != "undefined"){
+		       opts.url = opts.url + "?" + serializeObj_str(opts.data);
+		    }
+
         	//打开链接
         	xhr.open(opts.method, opts.url, opts.async);
         	//设置header
@@ -418,8 +458,13 @@
         			}
         		}
         	}
+
         	//发送数据
-        	xhr.send(serializeObj_str(opts.data));
+        	if(opts.method.toUpperCase() === "GET"){
+        	    xhr.send();
+        	}else if(opts.method.toUpperCase() === "POST"){
+        		xhr.send(serializeObj_str(opts.data));
+        	}
         };
 	})();
 

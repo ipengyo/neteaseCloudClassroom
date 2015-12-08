@@ -3,7 +3,6 @@
 	util.ready(function(){
 		var cookiesObj = util.getCookies();
 		var tipsElement = document.getElementById("tips");
-
 		if(cookiesObj && cookiesObj.topclose){
 			util.addClass(tipsElement, "f-dn");
 		}else{
@@ -53,11 +52,11 @@
 				}
 				return _flag;
 			}
-			util.addEventListener(loginUserName, "change",function(event){
+			util.addEventListener(loginUserName, "input",function(event){
 				util.removeClass(loginUserName, "error");
 			});
 
-			util.addEventListener(loginPassword, "change",function(event){
+			util.addEventListener(loginPassword, "input",function(event){
 				util.removeClass(loginPassword, "error");
 			});
 
@@ -132,7 +131,7 @@
 		var interval = 100;  //每次渐变时间 
 		var internlOpacity = 1/(time/interval); //每次渐变的透明度 
 		var timerId ; //定时器的Id
-		//var hrefItms = ["http://open.163.com/", "http://study.163.com/", "http://www.icourse163.org/"];
+		var oldIndex ;
 		util.forEach(imglist, function(item, i){
 			if(i == 0){
 				util.addClass(item.parentElement, "top");
@@ -145,7 +144,10 @@
 		//切换下面小圆点
 		var switchDot = function(){
 			util.forEach(dotlist, function(item){
-				util.removeClass(item,"z-show");
+				if(item.className === "z-show"){
+					util.removeClass(item, "z-show");
+					return ;
+				}	
 			});
 			util.addClass(dotlist[index], "z-show");
 		}
@@ -179,21 +181,248 @@
 		}
 
 		var play = function (){
-			var oldIndex = index;
+			 oldIndex = index;
 			index = (index+1) % imgAmount;
-			setTimeout(function(){
+			timerId = setTimeout(function(){
 				switchImg(oldIndex, index);
 				switchDot();
 				play();
 			}, autoInterval)
 		}
 
-		//util.addEventListener(mSld,"mouseout",play);
-		//util.addEventListener(mSld,"mouseover",stop);
+		var stop = function(){
+			index = oldIndex;
+			clearTimeout(timerId)
+		}
+		util.addEventListener(mSld,"mouseout",play);
+		util.addEventListener(mSld,"mouseover",stop);
 
 		play();
 
 	});
-	
+	//5.左侧内容区Tab切换
+	util.ready(function(){
+		var courseUrl = "http://study.163.com/webDev/couresByCategory.htm";
+		var courselist = document.getElementById("courselist");
+		var courselistOuter = document.getElementById("courselistOuter");
+		var tabs = document.getElementById("coursebdNav").getElementsByTagName("a");
+
+
+		//创建课程悬浮窗元素
+		var createdetailCourseElement = function(dataObj){
+			var wrapHtml = ("<div class=\"suspend_course\" id='suspend_course-#{id}'>");
+				wrapHtml +=("<div class=\"suspend_course_main f-cb\">");
+				wrapHtml +=("<img class=\"logo\" src=\" #{middlephotourl} \" alt=\"\">");
+				wrapHtml +=("<div class=\"info\">");
+				wrapHtml +=("<h2 class=\"tt\">#{name}</h2>");
+				wrapHtml +=("<p class=\"pnum\"> #{learnercount} 人在学</p>");
+				wrapHtml +=("<p class=\"autor\">发布者：#{provider}</p>");
+				wrapHtml +=("<p class=\"classify\">分类：#{categoryname}</p>");
+				wrapHtml +=("</div>");
+				wrapHtml +=("</div>");
+				wrapHtml +=("<p class=\"suspend_course_introduce\">#{description}</p>");
+				wrapHtml +=("</div>");
+			var tmpEl = document.createElement('div');
+			tmpEl.innerHTML = wrapHtml.format(dataObj);
+
+			return tmpEl.childNodes[0];
+		}
+		//鼠标移入
+		var mouseenterHandler = function(event){
+			var divX = 0;
+			var divY = 0;
+			event = event || window.event;
+			var target = event.target || event.srcElement;  
+			var courseAreaNode = document.getElementById("courseArea"); 
+			divX = this.offsetLeft + this.clientWidth;
+			divY = this.offsetTop; 
+			var parantWidth=this.offsetParent.clientWidth;
+
+			var dataset = util.getElementDataSet(this);
+
+			var detailNode = createdetailCourseElement(dataset); 
+			//左右适应
+			var flagProcessingwidth=true;
+			if(parantWidth >= 980){
+				if(dataset.index % 4 == 0 ){
+					detailNode.style.right =(parantWidth-this.offsetLeft+20) + "px";
+					flagProcessingwidth=false;
+				}
+				// else if(dataset.index % 4 == 3 ){
+				// 	detailNode.style.left =(divX-this.clientWidth-detailNode.width) + "px";
+				// 	flagProcessingwidth=false;
+				// }
+			}else if(parantWidth <= 735){
+				if(dataset.index % 3 == 0 ){
+					detailNode.style.left =(divX-this.clientWidth-detailNode.width) + "px";
+					flagProcessingwidth=false;
+				}
+			}
+
+			if(flagProcessingwidth){
+				detailNode.style.left = (divX + 20) + "px";
+			}
+			detailNode.style.top = divY + "px";
+			courselistOuter.appendChild(detailNode);
+		}
+		//鼠标移出
+		var mouseleaveHandler = function(event){
+			var dataset = util.getElementDataSet(this);
+			var detailNode = document.getElementById("suspend_course-"+dataset.id);
+			courselistOuter.removeChild(detailNode);
+		}
+
+		//创建课程
+		var createCourseElement = function(dataObj,index){
+			var courseUl = document.createElement("li");
+			var courseA = document.createElement("a");
+			courseA.setAttribute("href","http://study.163.com/course/introduction/"+dataObj.id+".htm#/courseDetail")
+			courseA.setAttribute("target","view_window")
+
+			courseA.setAttribute("data-id", dataObj.id);
+			courseA.setAttribute("data-name", dataObj.name);
+			courseA.setAttribute("data-provider", dataObj.provider);
+			courseA.setAttribute("data-learnerCount", dataObj.learnerCount);
+			courseA.setAttribute("data-categoryName", dataObj.categoryName);
+			courseA.setAttribute("data-middlePhotoUrl", dataObj.middlePhotoUrl); 
+			courseA.setAttribute("data-description", dataObj.description); 
+			courseA.setAttribute("data-index",index+1);
+			var wrapHtml =  "<img class='logo' src='#{middlePhotoUrl}' alt='#{name}'>";
+				wrapHtml += "<div class='infoarea'>"
+				wrapHtml += "<h1 class='tt'>#{name}</h1>"
+				wrapHtml += "<h2 class='writer'>#{provider}</h2>"
+				wrapHtml += "<p class='pnum'>#{learnerCount}</p>"
+				wrapHtml += "<p class='price'>￥#{price}</p>"								
+				wrapHtml += "</div>";
+			wrapHtml = wrapHtml.format(dataObj);
+			courseA.innerHTML = wrapHtml;
+			util.addEventListener(courseA,"mouseenter",mouseenterHandler);
+			util.addEventListener(courseA,"mouseleave",mouseleaveHandler);
+			courseUl.appendChild(courseA);
+			return courseUl;
+		}
+		//执行ajax查询
+		var go = function(ctype){
+			util.ajax({
+				'url': courseUrl,
+				'header': {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				 },
+				'data': {
+					'pageNo': 1,
+					'psize': 20,
+					'type': ctype,
+				},
+				'success' : function(data){
+					courselist.innerHTML = '';
+					var courseDataObj = JSON.parse(data);
+					var courseList = courseDataObj.list;
+
+					util.forEach(courseList, function(item,i){
+						courselist.appendChild(createCourseElement(item,i));
+					});
+				}
+			})
+		}
+
+		util.forEach(tabs, function(item){
+			util.addEventListener(item, "click", function(event){
+				util.preventDefault(event);
+				var target = event.target || event.srcElement;
+				util.forEach(tabs, function(item){
+					if(item.className === "z-crl"){
+						util.removeClass(item, "z-crl");
+						return ;
+					}	
+				});
+				util.addClass(target, "z-crl");
+				var dataset = util.getElementDataSet(target);
+				var ctype = dataset  && dataset.type;
+				go(ctype || 10);//如果获取不到默认为10
+			})
+		});
+
+		//触发事件
+		util.triggerEventListener(tabs[0], "click");
+	});
+	//7.视频弹框
+	util.ready(function(){
+		var openVideo =document.getElementById("openVideo");
+		var closeVideo = document.getElementById("closeVideo");
+
+		util.addEventListener(openVideo, "click", function(event){
+			util.removeClass(videoModal,"f-dn");
+		})
+		util.addEventListener(closeVideo, "click", function(event){
+			util.addClass(videoModal,"f-dn");
+		})
+	});
+
+	//8.热门推荐
+	util.ready(function(){
+		var hotIntervalId;
+		var hotNode = document.getElementById("rmph");
+
+		//创建课程节点
+		var createHotCrs = function(dataObj){
+			var wrapHtml = ("<li>");
+			wrapHtml += ("<img src=\"#{smallPhotoUrl}\">");
+			wrapHtml += ("<h2>#{name}</h2>");
+			wrapHtml += ("<span>#{learnerCount}</span>");
+			wrapHtml += ("</li>");
+			var tmpEl = document.createElement('div');
+			tmpEl.innerHTML = wrapHtml.format(dataObj);
+			return tmpEl.childNodes[0];
+		}
+		//请求数据
+		util.ajax({
+			url: "http://study.163.com/webDev/hotcouresByCategory.htm",
+			success: function(data){
+				var hotCrsList = JSON.parse(data);
+				util.forEach(hotCrsList, function(item){
+					hotNode.appendChild(createHotCrs(item));
+				});
+			}
+		});
+
+		//每5秒自动更换热点课程
+		var circleShowHotCrs = function(){
+			//每次滚动的高度
+			var _eachHeight=70; 
+			var _top = 0,
+				_timer;
+			_timer = setInterval(function(){
+				_top += 3;
+				hotNode.style.marginTop = "-"+_top + 'px';
+				if(_top > _eachHeight){
+					clearInterval(_timer);
+
+					//上一个结点
+					var _onNode = hotNode.children[0]
+
+					//重复滚动
+					if(_onNode.nodeType == 1){
+						hotNode.removeChild(_onNode);
+						hotNode.appendChild(_onNode);
+						hotNode.style.marginTop = "0px"; 
+					}					
+				}
+			},30);
+
+
+		}
+		//轮播热点课程
+		hotIntervalId = setInterval(circleShowHotCrs, 5000); 
+
+		//绑定mouseover事件
+		util.addEventListener(hotNode,"mouseover",function(){
+			clearInterval(hotIntervalId);
+		});
+
+		//绑定mouseout事件
+		util.addEventListener(hotNode,"mouseout",function(){
+			hotIntervalId = setInterval(circleShowHotCrs, 5000); 
+		});
+	});
 
 })();

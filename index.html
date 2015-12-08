@@ -25,9 +25,9 @@
 	<!-- /login -->
 
 	<!-- video -->
-	<div class="m-modal f-dn ">
+	<div class="m-modal f-dn " id="videoModal" >
 		<div class="bd ">
-			<div class="close" ><span class="closebtn">X</span></div>
+			<div class="close" ><span class="closebtn f-csp"  id="closeVideo"  >X</span></div>
 			<div class="m-video">
 				<p class="tt">请观看下面的视频</p>
 				<video autobuffer="" controls="">
@@ -157,12 +157,12 @@
 		<!-- coursebd -->
 		<div class="m-coursebd f-cb g-box">
 				<div class="main f-cb">
-					<ul class="nav">
-						<li><a href="#" class="z-crl">产品设计</a></li>
-						<li><a href="#">编程语言</a></li>
+					<ul class="nav" id="coursebdNav">
+						<li><a href="#"  data-type="10">产品设计</a></li>
+						<li><a href="#" data-type="20" >编程语言</a></li>
 					</ul>
-					<div class="courselist f-cb">
-						<div class="suspend_course">
+					<div class="courselist f-cb" id = "courselistOuter">
+						<!-- <div class="suspend_course">
 							<div class="suspend_course_main f-cb">
 								<img class="logo" src="http://img2.ph.126.net/1Md8406dmo1TPHnYD67fdw==/6598260537750239978.jpg" alt="">
 								<div class="info">
@@ -174,9 +174,9 @@
 							</div>
 							<p class="suspend_course_introduce">asdfsadf第三方飒沓阿斯蒂芬飒沓阿斯蒂芬飒沓12扼杀发大水阿斯蒂芬飒沓飒沓啊撒打发萨芬1额21额1额啥的	萨芬飒沓阿斯蒂芬撒打发第三方第三方程序中小城镇v阿萨德是打发312 四的方法倒萨给第三方倒萨阿萨德法师打发飒沓飒沓撒打发v阿萨德是打发312 四的方法倒萨给第三方倒萨阿萨德法师打发飒沓飒沓撒打发v阿萨德是打发312 四的方法倒萨给第三方倒萨阿萨德法师打发飒沓飒沓撒打发v阿萨德是打发312 四的方法倒萨给第三方倒萨阿萨德法师打发飒沓飒沓撒打发v阿萨德是打发312 四的方法倒萨给第三方倒萨阿萨德法师打发飒沓飒沓撒打发打发倒萨阿萨德阿斯蒂芬  撒旦范德萨发生大幅 撒旦法三大阿斯蒂芬</p>
 
-						</div>
-						<ul >
-						<li>
+						</div> -->
+						<ul id="courselist" >
+						<!-- <li>
 							<a href="javascript:void(0);">
 								<img class="logo" src="http://img2.ph.126.net/1Md8406dmo1TPHnYD67fdw==/6598260537750239978.jpg" alt="">
 								<div class="infoarea">
@@ -230,16 +230,16 @@
 									<p class="price">￥800.00</p>								
 								</div>
 							</a>
-						</li>
+						</li> -->
 					</ul>
 
 					</div>
 					
 					<ul class="m-page f-fr page-1">
 						<li><a href="javascript:void(0);" class="pre z-sel ">&lt;</a></li>
-						<li><a href="javascript:void(0);">1</a></li>
+						<li><a href="javascript:void(0);" class="z-crl" >1</a></li>
 						<li><a href="javascript:void(0);">2</a></li>
-						<li><a href="javascript:void(0);" class="z-crl">3</a></li>
+						<li><a href="javascript:void(0);">3</a></li>
 						<li><a href="javascript:void(0);">4</a></li>
 						<li><a href="javascript:void(0);">5</a></li>
 						<li><a href="javascript:void(0);" class="next z-sel">&gt;</a></li>
@@ -253,18 +253,18 @@
 						<div class="bd">
 							<div class="m-jgjs">
 								<p class="info">观看下面视频了解吧：</p>
-								<img src="images/videoCover.jpg" alt="点击播放">
+								<img src="images/videoCover.jpg" class="f-csp" id="openVideo" alt="点击播放">
 							</div>
 						</div>
 					</div>
 					<div class="b-20"></div>
-					<div class="m-jsbox ">
+					<div class="m-jsbox m-jsbox-1">
 						<div class="tt">
 							<h1>热门排行</h1>
 						</div>
-						<div class="bd">
-							<ul class="f-cbli m-rmph ">
-								<li>
+						<div class="bd f-csp" >
+							<ul class="f-cbli m-rmph" id="rmph">
+								<!-- <li>
 									<img src="http://img2.ph.126.net/80El3bguuXn3r3HMg4kbUw==/6630361879235664977.jpg">
 									<h2>前端从入门到精通Frist</h2>
 									<span>69</span>
@@ -318,7 +318,7 @@
 									<img src="http://img2.ph.126.net/80El3bguuXn3r3HMg4kbUw==/6630361879235664977.jpg">
 									<h2>前端从入门到精通</h2>
 									<span>69</span>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 					</div>

@@ -281,7 +281,7 @@
 	position: absolute;
 	top: -10px;
 	left: 0px;
-	width: 489px;
+	width: 475px;
 	background: #fff;
 	border: 1px solid #d0cfd0;
 
@@ -293,12 +293,18 @@
 	color: #666;
 }
 .m-coursebd  .suspend_course_main .logo{
+	width: 221px;
+	height: 123px;
 	float: left;
 } 
 .m-coursebd  .suspend_course_main .tt{
 	margin-top: 5px;
 	font-size: 18px;
 	color: #333;
+	width: 214px;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;	
 }
 .m-coursebd  .suspend_course_main .pnum{
 	margin:16px 0px;
@@ -308,6 +314,10 @@
 }
 .m-coursebd  .suspend_course_main .autor{
 	margin-bottom: 10px;
+	width: 214px;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .m-coursebd  .suspend_course_main .tt{
 	margin-top: 5px;
@@ -345,16 +355,20 @@
 	border: 1px solid #ebebeb;
 	box-shadow: 0px 1px 1px 0px #f1f1f1;
 	background: #fff;
+	color: #333;
+}
+.m-coursebd .courselist li a:hover{
+	color: #39a030;
 }
 .m-coursebd .courselist li .infoarea{
 	margin:10px 5px;
+
 }
 .m-coursebd .courselist li .logo{
 	width: 221px;
 	height: 123px;
 }
 .m-coursebd .courselist li .tt{
-	color: #333;
 	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -390,6 +404,7 @@
 	border: 1px solid #D4D3D3;
 	background: #FFF;
 }
+
 .m-jsbox .tt{
 	padding: 20px 0px 20px 20px;
 	font: 16px/16px "Microsoft YaHei";
@@ -398,6 +413,10 @@
 }
 .m-jsbox .bd{
 	padding: 20px 14px  20px 20px;
+}
+.m-jsbox-1 .bd{
+	overflow: hidden;
+	height:680px;
 }
 .m-jgjs .info{
 	margin-bottom:10px;
@@ -548,7 +567,7 @@ text-decoration:underline;
 	padding:10px 8px;
 	position: absolute;	
 	transform: translate(-50%, -50%);
-	top: 45%;
+	top: 50%;
 	left: 50%;
 	background-color: #fff;
 }
