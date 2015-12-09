@@ -624,3 +624,6 @@ text-decoration:underline;
 	font-size: 18px;
 	color: #444;
 }
+.m-video .video{
+	width: 100%;
+}

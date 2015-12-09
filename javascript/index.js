@@ -386,7 +386,7 @@
 		});
 
 		//每5秒自动更换热点课程
-		var circleShowHotCrs = function(){
+		var switchHotFn = function(){
 			//每次滚动的高度
 			var _eachHeight=70; 
 			var _top = 0,
@@ -412,7 +412,7 @@
 
 		}
 		//轮播热点课程
-		hotIntervalId = setInterval(circleShowHotCrs, 5000); 
+		hotIntervalId = setInterval(switchHotFn, 5000); 
 
 		//绑定mouseover事件
 		util.addEventListener(hotNode,"mouseover",function(){
@@ -421,7 +421,7 @@
 
 		//绑定mouseout事件
 		util.addEventListener(hotNode,"mouseout",function(){
-			hotIntervalId = setInterval(circleShowHotCrs, 5000); 
+			hotIntervalId = setInterval(switchHotFn, 5000); 
 		});
 	});
 
