@@ -245,13 +245,13 @@
 			var flagProcessingwidth=true;
 			if(parantWidth >= 980){
 				if(dataset.index % 4 == 0 ){
-					detailNode.style.right =(parantWidth-this.offsetLeft+20) + "px";
+					detailNode.style.left =(parantWidth-this.offsetLeft) + "px";
 					flagProcessingwidth=false;
 				}
-				// else if(dataset.index % 4 == 3 ){
-				// 	detailNode.style.left =(divX-this.clientWidth-detailNode.width) + "px";
-				// 	flagProcessingwidth=false;
-				// }
+				else if(dataset.index % 4 == 3 ){
+					detailNode.style.left =(divX-this.clientWidth-detailNode.width) + "px";
+					flagProcessingwidth=false;
+				}
 			}else if(parantWidth <= 735){
 				if(dataset.index % 3 == 0 ){
 					detailNode.style.left =(divX-this.clientWidth-detailNode.width) + "px";
