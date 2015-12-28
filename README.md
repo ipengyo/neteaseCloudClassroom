@@ -2,7 +2,7 @@
 
 ##网易前端
 * 模仿网易云课堂的首页  作者:ipengyo@qq.com
-
+* 预览地址：[点击](http://7xpkx2.com1.z0.glb.clouddn.com/)
 
 ###代码说明：
 
