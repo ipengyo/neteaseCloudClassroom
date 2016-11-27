@@ -189,6 +189,7 @@
 			var oldClassName = el.className;
 			forEach(classNames.split("/\s/"),function(item){
 				oldClassName = oldClassName.replace(classReg(item), ' ');
+				oldClassName = oldClassName.trim();
 			})
 			el.className = oldClassName;
 		}
@@ -278,15 +279,26 @@
 	    	return oEl.getElementsByClassName(sClass);
 	    }
 	  }else{
-	  	 return function(oEl, sClass, sEle){
-	  	 	oEl = oEl || d;
-		   	var aEle=oEl.getElementsByTagName(sEle || '*'),
-		        arr = [];
-		     forEach (aEle, function(){
-		     	classReg(sClass).test(sClass) && arr.push(item);
-		     });
-		    return arr;
-		  }
+                return function(oEl, sClass) {
+                    if (arguments.length == 0) {
+                        return ;
+                    }
+
+                    if (arguments.length == 1) {
+                        sClass = oEl;
+                        oEl = d;
+                    }
+
+                    var aEle = oEl.getElementsByTagName('*'),
+                        arr = [];
+
+                    forEach(aEle, function(item) {
+                        classReg(sClass).test(item.className) && arr.push(item);
+                    });
+
+                    return arr;
+                };
+
 	  } 
 	})();
 	/**
@@ -324,12 +336,13 @@
 	var getElementDataSet = util.getElementDataSet = function(el){
 		if(el.dataset) return el.dataset;
 		var oDataset = {};
-		forEach(el.attributes, function(item){
-			var name = element.attributes[i].nodeName;
-   			if(datasetReg.test(name)){
-				oDataset[name] = element.attributes[i].value;
+		forEach(el.attributes, function(item, i){
+			var name = el.attributes[i].nodeName;
+			if(datasetReg.test(name)){
+				oDataset[name.substring(5)] = el.attributes[i].value;
 		   }
 		})
+
 		return oDataset;
 	};
 
