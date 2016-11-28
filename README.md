@@ -6,6 +6,8 @@
 
 ###代码说明：
 
+* 代码解释（@SPxiaomin）： https://github.com/SPxiaomin/neteaseCloudClassroom-learn
+
 * cssReset，以及css规范命名参考 [网易前端NEC](http://nec.netease.com/)
 * 重置（reset）和默认（base）（tags）：消除默认样式和浏览器差异，并设置部分标签的初始样式，以减少后面的重复劳动！你可以根据你的网站需求设置！
 
