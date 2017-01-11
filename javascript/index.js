@@ -242,22 +242,22 @@
 
 			var detailNode = createdetailCourseElement(dataset); 
 			//左右适应
-			var flagProcessingwidth=true;
-			if(parantWidth >= 980){
-				if(dataset.index % 4 == 0 ){
-					detailNode.style.left =(parantWidth-this.offsetLeft) + "px";
-					flagProcessingwidth=false;
-				}
-				else if(dataset.index % 4 == 3 ){
-					detailNode.style.left =(divX-this.clientWidth-detailNode.width) + "px";
-					flagProcessingwidth=false;
-				}
-			}else if(parantWidth <= 735){
-				if(dataset.index % 3 == 0 ){
-					detailNode.style.left =(divX-this.clientWidth-detailNode.width) + "px";
-					flagProcessingwidth=false;
-				}
-			}
+                var flagProcessingwidth = true;
+                if (parentWidth >= 980) {
+
+                    if (dataset.index % 4 == 0) {
+                        detailNode.style.left = (parentWidth - this.offsetLeft) + 'px';
+                        flagProcessingwidth = false;
+                    } else if (dataset.index % 4 == 3) {
+                        flagProcessingwidth = false;
+                    }
+                } else if (parentWidth <= 735) {
+
+                    if (dataset.index % 3 == 0) {
+                        flagProcessingwidth = false;
+                    }
+                }
+
 
 			if(flagProcessingwidth){
 				detailNode.style.left = (divX + 20) + "px";
